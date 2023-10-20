@@ -1,0 +1,56 @@
+<div class="text-center">
+  <h1 class="mt-10 text-center">Лучшие рецепты</h1>
+  <div class="row-cols-1 row-cols-lg-7 text-center">
+    <p class="text-center text-secondary mb-5 mt-5">
+      На нашем сайте вы найдете лучшие рецепты, которые помогут вам создавать
+      великолепные блюда и порадовать своих близких и гостей своим кулинарным
+      мастерством.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div
+    class="col-auto col-sm-auto col-lg-4"
+    *ngFor="let recipe of bestRecipesSliced; let i = index"
+  >
+    <div class="card my-4">
+      <div class="card-body my-auto">
+        <button
+          class="btn btn-light position-absolute top-1 end-0 me-lg-4 me-sm-4 me-4 mt-2 rounded-circle"
+          (click)="favoriteUpdate(recipe.id)"
+        >
+          <i
+            class="bi"
+            [ngClass]="favoriteRecipes.includes(recipe.id) ? 'bi-heart-fill' : 'bi-heart'"
+          >
+          </i>
+        </button>
+        <img [src]="recipe.image" class="card-img-top rounded-4 mb-3">
+        <h4 class="card-title" [routerLink]="'recipe/' + recipe.id">
+          {{ recipe.title }}
+        </h4>
+      </div>
+      <div class="card-footer row-col-3 bg-transparent border-0 px-3 pb-4">
+        <span class="fw-light ms-2 me-4">
+          <img src="assets/Timer.svg" alt="Врмея приготовления">
+          {{ recipe.timeCooking }} минут
+        </span>
+
+        <span class="fw-light">
+          <img src="assets/ForkKnife.svg" alt="Вид"> {{ recipe.tags }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-cols-sm-1 row-cols-1 row-cols-xl-6 d-flex justify-content-center">
+  <button
+    [ngStyle]="{ hidden: true }"
+    class="btn btn-secondary my-5"
+    *ngIf="this.bestRecipes !== this.bestRecipesSliced"
+    (click)="this.bestRecipesSliced = this.bestRecipes"
+  >
+    Посмотреть еще
+  </button>
+</div>

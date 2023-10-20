@@ -1,0 +1,23 @@
+<div *ngIf="bannerState && !isErrorPage" class="banner fixed-bottom p-3">
+  <img src="assets/Speakerphone.svg" alt="Speakerphone.img" class="ms-5 me-3">
+  <span>Хорошие новости! Мы открыли наш интернет-магазин</span>
+  <a (click)="closeBanner()" class="float-end me-5">
+    <img class="close" src="assets/X.svg" alt="X.img">
+  </a>
+</div>
+
+<div class="footer_page" *ngIf="!isErrorPage">
+  <hr>
+  <div class="d-flex justify-content-between p-4 mb-2">
+    <div class="policy col-10">
+      <p>© 2023 Foodie, Все права защищены.</p>
+    </div>
+    <div class="social_links col-1">
+      <div class="social_link">
+        <img src="assets/git.svg" class="edit" alt="git.img">
+        <img src="assets/dribbble.svg" alt="dribbble.img">
+      </div>
+    </div>
+  </div>
+</div>
+

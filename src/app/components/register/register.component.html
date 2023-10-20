@@ -1,0 +1,87 @@
+<div class="box container-fluid">
+  <h3 class="text-center mb-5">Зарегистрируйте ваш аккаунт</h3>
+  <div class="card w-50 mx-auto my-auto">
+    <div class="card-body p-5">
+      <form>
+        <div class="form-group">
+          <div class="alert alert-danger pb-0" *ngIf="this.errData">
+            <p class="alert-heading">Ошибка при создании аккаунта!</p>
+          </div>
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="userPassword.hasError('minlength') && userPassword.touched"
+          >
+            <p class="alert-heading">
+              Длина пароля должна быть не менее 2-х символов
+            </p>
+          </div>
+
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="userPassword.hasError('pattern') && userPassword.touched"
+          >
+            <p class="alert-heading">
+              Пароль не должен содержать пробелы и кириллицу
+            </p>
+          </div>
+
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="userEmail.hasError('pattern') && userEmail.touched"
+          >
+            <p class="alert-heading">Неверный адрес почты</p>
+          </div>
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            pattern="[A-Za-z0-9]*[@][A-za-z][A-za-z]*[.][A-Za-z][A-Za-z]*"
+            name= "email"
+            minlength="2"
+            id="email"
+            [(ngModel)]="register.email"
+            #userEmail="ngModel"
+            [ngClass]="{'is-invalid':(
+                userEmail.hasError('pattern') ||
+                userEmail.hasError('minlength')) &&
+                userEmail.touched
+            }"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            class="form-control"
+            pattern="[A-Za-z0-9]*"
+            name="password"
+            id="password"
+            minlength="2"
+            [(ngModel)]="register.password"
+            #userPassword="ngModel"
+            [ngClass]="{'is-invalid':(
+            userPassword.hasError('pattern') ||
+            userPassword.hasError('minlength')) &&
+            userPassword.touched
+            }"
+            required
+          >
+        </div>
+        <button
+          (click)="registerUser()"
+          type="submit"
+          class="btn btn-primary w-100 mt-5 mb-3"
+          [disabled]="
+            userEmail.invalid ||
+            userPassword.invalid ||
+            userEmail.untouched ||
+            userPassword.untouched"
+        >
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

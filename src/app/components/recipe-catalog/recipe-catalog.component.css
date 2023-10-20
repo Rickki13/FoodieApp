@@ -1,0 +1,23 @@
+.box {
+  margin: 10rem 7rem 0 7rem;
+}
+
+.card {
+  border-radius: 30px;
+  min-height: 27rem;
+  border: 0px;
+  background: #e5f8fc;
+  transition: all 0.5s;
+}
+
+.card-title {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.alert-primary {
+  background-color: #e5f8fc;
+}

@@ -1,0 +1,291 @@
+<div class="box">
+  <h1 class="fw-bolder mb-4">{{ recipeInfo.title }}</h1>
+  <div class="row mt-5 my-auto">
+    <img
+      [src]="recipeInfo.user.image"
+      class="col rounded-circle col-lg-1 p-lg-4 p-sm-0 col-sm-1 col-1 p-0"
+      alt="Фото пользователя"
+    >
+
+    <div
+      class="col-lg-2 col-sm-10 col-10 ms-0 me-0 my-auto border-1 border-end"
+    >
+      <span class="fw-bold">{{ recipeInfo.user.name }}</span
+      ><br />
+      <span class="text-secondary">{{
+        recipeInfo.user.date | date : "d MMMM yyyy" : "+2" : "ru"
+        }}</span>
+    </div>
+
+    <div class="col-lg-3 col-sm-12 col-12 ms-0 ms-md-3 mt-sm-3 my-lg-auto">
+      <div class="row">
+        <div class="col col-2 col-md-1 p-0 ms-3 my-auto">
+          <img src="assets/Timer.svg" class="my-auto">
+        </div>
+        <div class="col col-sm-10 col-6 my-auto border-1 border-end pe-0">
+          <p class="mb-0 my-auto fw-light">ВРЕМЯ ПРИГОТОВЛЕНИЯ</p>
+          <p class="text-secondary fw-light mt-0 my-auto">
+            {{ recipeInfo.timeCooking }} минут
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-lg-3 col-sm-12 col-12 ms-0 ms-md-3 mt-sm-3 mb-sm-5 mb-5 my-lg-auto"
+    >
+      <div class="row">
+        <div class="col col-2 col-md-1 p-0 ms-3 my-auto">
+          <img src="assets/ForkKnife.svg" class="my-auto" alt="Тип еды">
+        </div>
+        <div class="col col-sm-10 col-6 my-auto pe-0">
+          <p class="mb-0 my-auto fw-light">{{ recipeInfo.tags }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-1 col-2 p-0 m-0 ms-3 ms-lg-0 text-lg-center text-sm-start">
+      <a>
+        <i
+          class="bi bi-printer rounded-circle p-4"
+          (click)="printThisPage()"
+        ></i>
+      </a>
+    </div>
+
+    <div class="col-lg-1 col-2 p-0 m-0 text-lg-center text-sm-start">
+      <i
+        class="bi bi-box-arrow-up rounded-circle p-4"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      ></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <img
+      [src]="recipeInfo.image"
+      class="scale col-lg-7 rounded-5 my-5 mt-lg-0 mx-1"
+
+    >
+    <div class="col-lg-4 my-5 mt-sm-0">
+      <div class="card bg-primary rounded-5 border-0 p-2">
+        <div class="card-body">
+          <h3 class="card-title mb-3 fw-bold">Пищевая ценность</h3>
+          <ng-container
+            *ngTemplateOutlet="
+              FoodValue;
+              context: {
+                _name: 'Калории',
+                _value: recipeInfo.foodValue.calories,
+                _mesure: 'ккал'
+              }
+            "
+          ></ng-container>
+          <hr>
+
+          <ng-container
+            *ngTemplateOutlet="
+              FoodValue;
+              context: {
+                _name: 'Жиры',
+                _value: recipeInfo.foodValue.fats,
+                _mesure: 'г'
+              }
+            "
+          ></ng-container>
+          <hr>
+
+          <ng-container
+            *ngTemplateOutlet="
+              FoodValue;
+              context: {
+                _name: 'Углеводы',
+                _value: recipeInfo.foodValue.carbohydrates,
+                _mesure: 'г'
+              }
+            "
+          ></ng-container>
+          <hr>
+
+          <ng-container
+            *ngTemplateOutlet="
+              FoodValue;
+              context: {
+                _name: 'Белки',
+                _value: recipeInfo.foodValue.belki,
+                _mesure: 'г'
+              }
+            "
+          ></ng-container>
+        </div>
+        <div class="row my-auto">
+          <span class="my-auto text-center text-secondary mb-2">
+            Значения приблизительные
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <p class="text-secondary">{{ recipeInfo.body }}</p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-7 pe-5">
+      <h3 class="my-5 mb-4 fw-bold">Ингридиенты</h3>
+      <h4 class="mb-4 fw-bold">Что вам пригодится</h4>
+
+      <ng-container *ngFor="
+          let ingredient of recipeInfo.additionalInformation.ingredients;
+          let i = index
+        "
+      >
+        <input
+          class="form-check-input p-2 mt-3 rounded-circle"
+          type="checkbox"
+          [id]="'check' + i"
+          (click)="recipeIngUpdate(ingredient)"
+          [checked]="recipeIngredients.includes(ingredient)"
+        />
+        <label
+          class="form-check-label my-1 p-3"
+          [for]="'check' + i"
+          [ngClass]="{'strikethrough-styling': recipeIngredients.includes(ingredient)}"
+        >
+          {{ ingredient }}
+        </label>
+        <hr>
+      </ng-container>
+    </div>
+
+    <div class="col-lg-5">
+      <h3 class="mb-5 mt-5 fw-bold">Прочие рецепты</h3>
+      <div class="row mb-5 mt-5 anotherRec" *ngFor="let recipe of randomRecipes">
+        <img
+          [src]="recipe.image"
+          class="col-lg-5 fit p-0 m-0 rounded-5"
+        >
+        <div class="d-flex flex-column col-6">
+          <div class="row">
+            <h6 class="card-title" (click)="redirectTo('/recipe/' + recipe.id)">
+              {{ recipe.title }}
+            </h6>
+          </div>
+          <div class="my-auto">
+            <p class="text-secondary">От {{ recipe.user.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3 class="my-5 fw-bold">Шаги приготовления</h3>
+    <div class="col-lg-7 pe-5">
+      <ng-container *ngFor="
+          let step of recipeInfo.additionalInformation.details;
+          let i = index
+        "
+      >
+        <div class="row">
+          <div class="col-1 my-4">
+            <input
+              class="form-check-input p-2 rounded-circle m-0 mt-1"
+              type="checkbox"
+              (click)="recipeStepUpdate(step.body)"
+              [id]="'checkSteps' + i"
+              [checked]="recipeSteps.includes(step.body)"
+            >
+          </div>
+          <div class="col-11 ms-0 ps-0">
+            <label
+              class="form-check-label mt-4 fw-bold"
+              [for]="'checkSteps' + i"
+              [ngClass]="{'strikethrough-styling': recipeSteps.includes(step.body)}"
+            >
+              <h5 class="fw-bold">{{ i + 1 }}. {{ step.title }}</h5>
+            </label>
+            <p
+              class="text-secondary mb-4"
+              [ngClass]="{'strikethrough-styling': recipeSteps.includes(step.body)}"
+            >
+              {{ step.body }}
+            </p>
+            <hr>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <h2 class="text-center my-5 fw-bold">Возможно вам понравятся эти рецепты</h2>
+  <app-try-recipe></app-try-recipe>
+
+  <h2 class="my-5 fw-bold">Комментарии</h2>
+  <ng-container *ngFor="let comment of recipeInfo.comments">
+    <div class="row mb-2">
+      <div class="col-2">
+        <span class="fw-bold">{{ comment.user.username }}</span>
+        <br>
+        <span class="text-secondary">
+          {{
+          comment.dateCreated | date
+              : "dd.MM.yyyy hh:mm"
+              : "+2"
+              : "ru"
+          }}
+        </span>
+      </div>
+      <div class="row my-2">
+        <p>{{ comment.body }}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template
+  #FoodValue
+  let-name="_name"
+  let-value="_value"
+  let-mesure="_mesure"
+>
+  <div class="row">
+    <div class="col float-start text-secondary">{{ name }}</div>
+    <div class="col float-end text-end">{{ value }} {{ mesure }}</div>
+  </div>
+</ng-template>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Поделиться этим рецептом?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+      <div class="modal-body">Вы хотите поделиться данным рецептом?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Закрыть
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Поделиться
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

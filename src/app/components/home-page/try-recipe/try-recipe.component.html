@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-lg-3" *ngFor="let recipe of randomRecipes; let i = index">
+    <div class="card my-4">
+      <div class="card-body my-auto">
+        <button
+          class="btn btn-light position-absolute top-1 end-0 me-4 mt-2 rounded-circle z-2"
+          (click)="favoriteUpdate(recipe.id)"
+        >
+          <i
+            class="bi"
+            [ngClass]="favoriteRecipes.includes(recipe.id) ? 'bi-heart-fill' : 'bi-heart'"
+          >
+          </i>
+        </button>
+        <img [src]="recipe.image" class="card-img-top rounded-4 mb-3">
+        <h4 class="card-title" (click)="redirectTo('/recipe/' + recipe.id)">
+          {{ recipe.title }}
+        </h4>
+      </div>
+      <div
+        class="card-footer row-col-3 bg-transparent border-0 px-3 pb-4"
+        [routerLink]="'recipe/' + recipe.id"
+      >
+        <span class="fw-light ms-2 me-4">
+          <img src="assets/Timer.svg">
+          {{ recipe.timeCooking }} минут
+        </span>
+
+        <span class="fw-light">
+          <img src="assets/ForkKnife.svg">
+          {{ recipe.tags }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

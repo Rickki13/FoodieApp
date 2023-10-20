@@ -1,0 +1,12 @@
+th {
+  text-transform: uppercase;
+}
+
+td {
+  padding: 1.5rem;
+}
+
+table > tbody > tr:nth-child(even) > td,
+table > thead > tr > th {
+  background-color: #f9fafb !important;
+}

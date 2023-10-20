@@ -25,10 +25,8 @@ export class AccessRoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const requiredRole = route.data['requiredRole'] as 'guest' | 'user' | 'admin'; // Используйте квадратные скобки
-    if (requiredRole === 'guest') {
-      return true;
-    } else if (requiredRole === 'user') {
+    const requiredRole = route.data['requiredRole'] as 'guest' | 'user' | 'admin';
+    if (requiredRole === 'user') {
       if (this.dataService.role === 'user' || this.dataService.role === 'admin') {
         return true;
       }

@@ -1,0 +1,80 @@
+<button
+  class="carousel-control-prev h-100 mt-lg-0 mt-sm-0 mt-0"
+  type="button"
+  data-bs-target="#carousel"
+  data-bs-slide="prev"
+>
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+</button>
+<button
+  class="carousel-control-next h-100 mt-lg-0 mt-sm-0 mt-0"
+  type="button"
+  data-bs-target="#carousel"
+  data-bs-slide="next"
+>
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+</button>
+<div
+  class="carousel slide ms-sm-5 ms-5 mt-5"
+  id="carousel"
+  data-bs-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div
+      *ngFor="let post of postsFavoriteArray; let i = index"
+      class="row carousel-item mt-5"
+      data-bs-interval="5000"
+      [ngClass]="{ active: i == 1 }"
+    >
+      <div class="row mt-5">
+        <div class="col-12 col-xl-12 mt-4">
+          <div class="card rounded-5 pe-0 bg-primary">
+            <div class="row card-body p-0">
+              <div class="col-xl-6 p-5 d-flex flex-column">
+                <h1 class="card-title">{{ post.title }}</h1>
+                <p class="card-text pt-4">{{ post.body }}</p>
+
+                <div class="row column-gap-2 mt-auto mx-0">
+                  <div class="col-lg-4 col-sm-6 col-6 bg-grey p-3 ms-4">
+                    <img src="assets/Timer.svg">
+                    <span class="ms-3">{{ post.timeCooking }} минут</span>
+                  </div>
+
+                  <div class="col-lg-4 col-sm-6 col-6 bg-grey p-3">
+                    <img src="assets/ForkKnife.svg">
+                    <span class="ms-3">{{ post.tags }}</span>
+                  </div>
+                </div>
+
+                <div class="row mt-3 row-cols-2 row-cols-lg-auto mx-0">
+                  <img
+                    [src]="post.user.image"
+                    class="rounded-circle col-md-2 p-4 py-1 my-auto me-0"
+                    alt="Фото пользователя"
+                  >
+                  <div class="col-sm-12 col-lg-5 px-0 ms-0">
+                    <span class="fw-bold">{{ post.user.name }}</span>
+                    <br>
+                    <span class="text-secondary">
+                      {{post.user.date | date : "d MMMM yyyy" : "+2" : "ru"}}
+                    </span>
+                  </div>
+
+                  <button
+                    href=""
+                    class="btn btn-dark fw-medium rounded-4 px-lg-1 mt-3 mx-auto col-md-12 col-12 col-lg-4 mt-lg-0 mb-lg-3 mb-md-0"
+                    routerLink="recipe/{{ post.id }}"
+                  >
+                    Посмотреть
+                    <img src="assets/PlayCircle.svg" class="icons ps-2">
+                  </button>
+                </div>
+              </div>
+              <img class="col-xl-6 rounded-5 rounded-start-0 scale" [src]="post.image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

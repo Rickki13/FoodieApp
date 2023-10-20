@@ -1,0 +1,110 @@
+<div class="box container-fluid col-lg-3 col-md-5 col-10">
+  <h3 class="text-center mb-5 fw-bold">Войдите в ваш аккаунт</h3>
+  <div class="card mx-auto my-auto">
+    <div class="card-body p-lg-5 p-md-3">
+      <form>
+        <div class="form-group">
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="this.errData"
+          >
+            <p class="alert-heading">Неверный логин или пароль</p>
+          </div>
+
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="
+              (userLogin.hasError('minlength') && userLogin.touched) ||
+              (userPassword.hasError('minlength') && userPassword.touched)
+            "
+          >
+            <p class="alert-heading">
+              Длины логина и пароля должны быть не менее 2-х символов
+            </p>
+          </div>
+
+          <div
+            class="alert alert-danger pb-0"
+            *ngIf="
+              (userLogin.hasError('pattern') && userLogin.touched) ||
+              (userPassword.hasError('pattern') && userPassword.touched)
+            "
+          >
+            <p class="alert-heading">
+              Логин и пароль не могут содержать пробелы и кириллицу
+            </p>
+          </div>
+
+          <label for="login">Логин</label>
+          <input
+            type="text"
+            class="form-control"
+            pattern="[A-Za-z0-9]*"
+            name="login"
+            minlength="2"
+            [(ngModel)]="auth.username"
+            #userLogin="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                (userLogin.hasError('pattern') ||
+                  userLogin.hasError('minlength')) &&
+                userLogin.touched
+            }"
+            id="login"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль</label>
+          <input
+            type="password"
+            class="form-control"
+            pattern="[A-Za-z0-9]*"
+            name="password"
+            minlength="2"
+            [(ngModel)]="auth.password"
+            #userPassword="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                (userPassword.hasError('pattern') ||
+                  userPassword.hasError('minlength')) &&
+                userPassword.touched
+            }"
+            id="password"
+            required
+          >
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <input
+              type="checkbox"
+              class="form-check-input me-1"
+              id="remember"
+            >
+            <label class="form-check-label" for="remember">
+              Запомнить меня
+            </label>
+          </div>
+          <div class="col">
+            <a routerLink="/register">Зарегистрироваться</a>
+          </div>
+        </div>
+        <button
+          (click)="authorizeUser()"
+          type="submit"
+          class="btn btn-primary w-100 mt-2 mb-3"
+          [disabled]="
+            userLogin.invalid || userPassword.invalid || userLogin.untouched
+          "
+        >
+          Войти
+        </button>
+      </form>
+      <h6><span class="text-secondary">Или войти через</span></h6>
+      <button class="btn btn-outline-primary w-100">
+        <img src="/assets/git.svg" alt="git.img">
+      </button>
+
+    </div>
+  </div>
+</div>

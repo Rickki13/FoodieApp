@@ -1,0 +1,25 @@
+.mt-10 {
+  margin-top: 10rem;
+}
+
+.text-active {
+  color: #065f46;
+  background-color: #d1fae5;
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+.scale {
+  object-fit: contain;
+  width: 4rem;
+  height: 4rem;
+}
+
+.mx-8 {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+td {
+  padding-right: 0px;
+}

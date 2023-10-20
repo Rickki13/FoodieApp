@@ -1,0 +1,94 @@
+.box {
+  margin-top: 10rem;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+h6 {
+  width: 100%;
+  text-align: center;
+  font-weight: 400;
+  border-bottom: 1px solid #00000096;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+h6 span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.btn-outline-primary {
+  color: grey;
+  border: 1px solid grey;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3A3395 !important;
+}
+
+.btn-primary {
+  background-color: #3A3395 !important;
+  border-color: #3A3395;
+}
+
+
+.btn-primary {
+  background-color: #3a3395;
+  border-radius: 6px;
+}
+
+.input-file {
+  display: flex;
+  width: 512px;
+  padding: 22px 26px 26px 26px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-radius: 6px;
+  border: #d1d5db;
+}
+
+.input-file-text {
+  padding: 0 10px;
+  line-height: 40px;
+  display: inline-block;
+}
+.input-file input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/* Focus */
+.input-file input[type="file"]:focus + .input-file-btn {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-file.is-invalid {
+  border: #c20701;
+}
+
+.input-group-text.delete {
+  color: #3a3395;
+  background-color: white;
+  border-left: 0 !important;
+}
+
+.file-container {
+  border-radius: 10px;
+  padding: 5px;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

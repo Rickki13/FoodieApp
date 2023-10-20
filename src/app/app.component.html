@@ -1,12 +1,5 @@
-<button (click)="changeRole('guest')">Гость</button>
-<button (click)="changeRole('user')">Зарегистрированный</button>
-<button (click)="changeRole('admin')">Администратор</button>
+<app-header-comp class="fixed-top"></app-header-comp>
 
-<button routerLink="/">Главная</button>
-<button routerLink="/recipe">Каталог рецептов</button>
-<button routerLink="/create-recipe">Создать рецепт</button>
-<button routerLink="/admin/users">Управление пользователями</button>
-<button routerLink="/admin/recipes">Управление рецептами</button>
-<button routerLink="/admin/recipes/1">Управление рецептами</button>
+<router-outlet ></router-outlet>
 
-<router-outlet></router-outlet>
+<app-footer-comp></app-footer-comp>

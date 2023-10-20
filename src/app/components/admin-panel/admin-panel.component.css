@@ -1,0 +1,20 @@
+.active {
+  font-weight: bold;
+}
+
+.mx-8 {
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.fullbody {
+  min-height: 60vh;
+}
+
+.nav-link {
+  color: #6b7280;
+}
+
+.nav-link.active {
+  color: #3a3395;
+}

@@ -1,0 +1,306 @@
+<div class="container container-fluid">
+  <h1 class="mt-10">Изменение рецепта: {{ editRecipe.title }}</h1>
+
+  <div
+    class="alert alert-danger mt-3 pt-3 pb-1"
+    *ngIf="
+      recipeTime.hasError('pattern') ||
+      recipeBelki.hasError('pattern') ||
+      recipeFats.hasError('pattern') ||
+      recipeCarbs.hasError('pattern') ||
+      recipeCcal.hasError('pattern')
+    "
+  >
+    <h6>
+      Поля времени приготовления, белков, жиров, углеводов и калорий должны содержать только числа!
+    </h6>
+  </div>
+
+  <div
+    class="alert alert-danger mt-3 pt-3 pb-1"
+    *ngIf="
+      (recipeName.touched && recipeName.invalid) ||
+      (recipeDesc.touched && recipeDesc.invalid) ||
+      (recipeCategory.touched && recipeCategory.invalid) ||
+      (recipeTime.touched && recipeTime.invalid) ||
+      (recipeFirstIng.touched && recipeFirstIng.invalid) ||
+      (recipeBelki.touched && recipeBelki.invalid) ||
+      (recipeFats.touched && recipeFats.invalid) ||
+      (recipeCarbs.touched && recipeCarbs.invalid) ||
+      (recipeCcal.touched && recipeCcal.invalid) ||
+      (recipeFirstStep.touched && recipeFirstStep.invalid) ||
+      (recipeStepDesc.touched && recipeStepDesc.invalid)
+    "
+  >
+    <h6>Все поля должны быть заполнены!</h6>
+  </div>
+
+  <h5 class="mt-5 mb-2">Основная информация</h5>
+  <hr>
+  <form>
+    <div class="form-group">
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeName" class="col-form-label">Название рецепта</label>
+        </div>
+        <div class="col-6">
+          <input
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeName"
+            name="recipeName"
+            #recipeName="ngModel"
+            [ngClass]="{'is-invalid': recipeName.touched && recipeName.invalid}"
+            [(ngModel)]="editRecipe.title"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeDesc" class="col-form-label">Краткое описание</label>
+        </div>
+        <div class="col-6">
+          <textarea
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeDesc"
+            name="recipeDesc"
+            #recipeDesc="ngModel"
+            [ngClass]="{'is-invalid': recipeDesc.touched && recipeDesc.invalid}"
+            [(ngModel)]="editRecipe.body"
+            required
+          ></textarea>
+          <p class="text-secondary mt-2">Опишите о чем ваш рецепт</p>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <div class="form-group">
+      <h5 class="mt-5 mb-3">Дополнительная информация</h5>
+      <hr>
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeCat" class="col-form-label">Категория</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeCat"
+            name="recipeCat"
+            #recipeCategory="ngModel"
+            [ngClass]="{'is-invalid': recipeCategory.touched && recipeCategory.invalid}"
+            [(ngModel)]="editRecipe.tags"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeTime" class="col-form-label">Время приготовления</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="number"
+            minlength="1"
+            pattern="[0-9]*[.]*[0-9]*"
+            class="form-control"
+            id="recipeTime"
+            name="recipeTime"
+            #recipeTime="ngModel"
+            [ngClass]="{'is-invalid': recipeTime.touched && recipeTime.invalid}"
+            [(ngModel)]="editRecipe.timeCooking"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeFirstIng" class="col-form-label">Первый ингридиент</label>
+        </div>
+        <div class="col-6">
+          <input
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeFirstIng"
+            name="recipeFirstIng"
+            #recipeFirstIng="ngModel"
+            [ngClass]="{'is-invalid': recipeFirstIng.touched && recipeFirstIng.invalid}"
+            [(ngModel)]="editRecipe.additionalInformation!.ingredients[0]"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeBelki" class="col-form-label">Белки</label>
+        </div>
+        <div class="col-6">
+          <input
+            type="number"
+            minlength="1"
+            pattern="[0-9]*[.]*[0-9]*"
+            class="form-control"
+            id="recipeBelki"
+            name="recipeBelki"
+            #recipeBelki="ngModel"
+            [ngClass]="{'is-invalid': recipeBelki.touched && recipeBelki.invalid}"
+            [(ngModel)]="editRecipe.foodValue.belki"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeFats" class="col-form-label">Жиры</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="number"
+            minlength="1"
+            pattern="[0-9]*[.]*[0-9]*"
+            class="form-control"
+            id="recipeFats"
+            name="recipeFats"
+            #recipeFats="ngModel"
+            [ngClass]="{'is-invalid': recipeFats.touched && recipeFats.invalid}"
+            [(ngModel)]="editRecipe.foodValue.fats"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeCarbs" class="col-form-label">Углеводы</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="number"
+            minlength="1"
+            pattern="[0-9]*[.]*[0-9]*"
+            class="form-control"
+            id="recipeCarbs"
+            name="recipeCarbs"
+            #recipeCarbs="ngModel"
+            [ngClass]="{'is-invalid': recipeCarbs.touched && recipeCarbs.invalid}"
+            [(ngModel)]="editRecipe.foodValue.carbohydrates"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeCcal" class="col-form-label">Калории</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="number"
+            minlength="1"
+            pattern="[0-9]*[.]*[0-9]*"
+            class="form-control"
+            id="recipeCcal"
+            name="recipeCcal"
+            #recipeCcal="ngModel"
+            [ngClass]="{'is-invalid': recipeCcal.touched && recipeCcal.invalid}"
+            [(ngModel)]="editRecipe.foodValue.calories"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <div class="form-group">
+      <h5 class="mt-5">Детальная информация</h5>
+      <p class="text-secondary mb-3">
+        Детально опишите первый шаг вашего рецепта
+      </p>
+      <hr>
+
+      <div class="row g-5 justify-content-start">
+        <div class="col-4">
+          <label for="recipeFirstStep" class="col-form-label">Краткое действие первого шага</label>
+        </div>
+        <div class="col-4">
+          <input
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeFirstStep"
+            name="recipeFirstStep"
+            #recipeFirstStep="ngModel"
+            [ngClass]="{'is-invalid': recipeFirstStep.touched && recipeFirstStep.invalid}"
+            [(ngModel)]="editRecipe.additionalInformation!.details[0].title"
+            placeholder="Разогреть сковородку"
+            required
+          >
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-5 justify-content-start mb-5">
+        <div class="col-4">
+          <label for="recipeStepDesc" class="col-form-label">Описание первого шага</label>
+        </div>
+        <div class="col-6">
+          <textarea
+            type="text"
+            minlength="1"
+            class="form-control"
+            id="recipeStepDesc"
+            name="recipeStepDesc"
+            #recipeStepDesc="ngModel"
+            [ngClass]="{'is-invalid': recipeStepDesc.touched && recipeStepDesc.invalid}"
+            [(ngModel)]="editRecipe.additionalInformation!.details[0].body"
+            placeholder="Разогреть сковородку. Затем положить туда репчатый лук"
+            required
+          ></textarea>
+        </div>
+        <hr class="mb-5">
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <button
+        type="submit"
+        class="btn btn-primary col-lg-auto col-sm-12 px-5 py-3 mb-5"
+        [disabled]="
+          recipeName.invalid ||
+          recipeDesc.invalid ||
+          recipeCategory.invalid ||
+          recipeTime.invalid ||
+          recipeFirstIng.invalid ||
+          recipeBelki.invalid ||
+          recipeFats.invalid ||
+          recipeCarbs.invalid ||
+          recipeCcal.invalid ||
+          recipeFirstStep.invalid ||
+          recipeStepDesc.invalid
+        "
+        (click)="sendEditedRecipe()"
+      >
+        <i class="bi bi-envelope-fill" style="color: white"></i>
+        Редактировать этот рецепт рецепт
+      </button>
+    </div>
+  </form>
+</div>

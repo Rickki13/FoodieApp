@@ -1,0 +1,35 @@
+<div class="mx-lg-5 mx-sm-0 fullbody">
+  <table class="table mt-3 ms-3 p-0 me-5">
+    <thead class="table-light px-0">
+    <tr>
+      <th class="pe-0 ps-1 fw-light text-secondary" colspan="2">
+        НАИМЕНОВАНИЕ
+      </th>
+      <th class="pe-0 ps-1 fw-light text-secondary text-center">СТАТУС</th>
+      <th class="pe-0 ps-1 fw-light text-secondary text-center">РОЛЬ</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="px-0">
+    <tr *ngFor="let user of usersInfo">
+      <td colspan="1" class="pe-0">
+        <img [src]="user.image" class="rounded-circle scale">
+      </td>
+      <td colspan="1" class="text-center pt-4">
+        <span class="fw-bold">{{ user.fullName }}</span>
+      </td>
+      <td class="text-center pt-4">
+        <span class="text-active my-auto">Активен</span>
+      </td>
+      <td class="text-center pt-4">
+          <span class="text-secondary my-auto">
+            {{ roles.get(user.role) }}
+          </span>
+      </td>
+      <td class="text-center pt-4">
+        <a style="cursor: pointer" class="active">Редактировать</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

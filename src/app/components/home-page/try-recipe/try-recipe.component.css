@@ -1,0 +1,23 @@
+.mt-10 {
+  margin-top: 10rem;
+}
+
+.mx-15 {
+  margin-left: 15rem;
+  margin-right: 15rem;
+}
+
+.card {
+  border-radius: 30px;
+  min-height: 23rem;
+  border: 0;
+  transition: all 0.5s;
+}
+
+.card-title {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,61 @@
+<div class="row mt-5 mb-5">
+  <h2 class="text-center fw-bold mb-5 mt-5">Почему именно мы?</h2>
+  <ng-container
+    *ngTemplateOutlet="
+      card;
+      context: {
+        _header: 'Проверенные рецепты',
+        _body:
+          'Вы можете найти множество проверенных рецептов, которые помогут вам приготовить вкусные и разнообразные блюда для всей семьи.'
+      }
+    "
+  />
+  <ng-container
+    *ngTemplateOutlet="
+      card;
+      context: {
+        _header: 'Для всех',
+        _body:
+          'Вы сможете найти легкие и вкусные блюда, которые понравятся и детям, и взрослым.'
+      }
+    "
+  />
+  <ng-container
+    *ngTemplateOutlet="
+      card;
+      context: {
+        _header: 'Огромное разнообразие',
+        _body:
+          'Разнообразие рецептов для всех порадует самых разносторонних гурманов'
+      }
+    "
+  />
+  <ng-container
+    *ngTemplateOutlet="
+      card;
+      context: {
+        _header: 'Храним рецепт для вас',
+        _body:
+          'Это отличный способ организовать и хранить свою коллекцию ' +
+           'кулинарных рецептов. Вместо того, чтобы хранить бумажные копии ' +
+            'или оставлять их в  разных кулинарных книгах.'
+      }
+    "
+  />
+
+  <ng-template #card let-header="_header" let-body="_body">
+    <div class="col-12 col-lg-3">
+      <div class="row m-0 p-0">
+        <div class="col col-1 p-0 m-0">
+          <img src="assets/Check.svg" alt="Check">
+        </div>
+        <div class="col">
+          <h6>{{ header }}</h6>
+          <p class="text-secondary fw-light">
+            {{ body }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

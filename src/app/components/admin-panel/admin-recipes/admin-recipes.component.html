@@ -1,0 +1,68 @@
+<div class="mx-lg-5 fullbody">
+  <table>
+    <thead>
+    <tr>
+      <th class="fw-light ps-lg-2">Название рецепта</th>
+      <th class="fw-light ps-lg-2">Описание рецепта</th>
+      <th class="fw-light ps-lg-2">ID рецепта</th>
+      <th class="fw-light ps-lg-2">Категория</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let post of postsInfo">
+      <td class="fw-normal">{{ post.title }}</td>
+      <td class="fw-light">{{ post.body }}</td>
+      <td class="text-center fw-light">{{ post.id }}</td>
+      <td class="fw-light">{{ post.tags }}</td>
+      <td class="w-auto" [routerLink]="'./' + post.id">
+        <img src="assets/edit_rec.svg" alt="Изменить рецепт">
+      </td>
+      <td
+        data-bs-toggle="modal"
+        data-bs-target="#removeModal"
+        (click)="this.removeId = post.id"
+      >
+        <img src="assets/delete.svg" alt="Удалить рецепт">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade"
+  id="removeModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Удаление</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+      <div class="modal-body">Вы действительно хотите удалить этот рецепт?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Закрыть
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="deleteRecipe()"
+        >
+          Удалить
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.footer_page {
+  max-height: 10rem;
+}
+
+.social_links,
+.social_links:not([href]) {
+  cursor: pointer;
+}
+
+.banner {
+  background-color: #3a3395;
+  color: white;
+}
+
+.close {
+  cursor: pointer;
+}

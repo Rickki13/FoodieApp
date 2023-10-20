@@ -1,0 +1,100 @@
+<nav
+  class="navbar navbar-expand-md bg-body border-bottom py-3"
+  *ngIf="!isErrorPage"
+>
+  <div class="container-fluid ms-5">
+    <a class="navbar-brand fw-semibold" routerLink="/">Foodie</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ 'col-12': curUser.isAuth }"
+      id="navbarNavDropdown"
+    >
+      <div class="container container-fluid ps-5">
+        <ul class="navbar-nav justify-content-center ps-5">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="recipe">Каталог рецептов</a>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        *ngIf="this.curRole === 'user' || this.curRole === 'admin'; else Guest"
+        class="nav-item dropdown d-flex justify-content-center align-items-center"
+      >
+        <img
+          src="assets/create.svg"
+          routerLink="create-recipe"
+          alt="Create recipe"
+        >
+        <a
+          class="nav-link me-0 ms-0 z-0"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div class="row justify-content-start align-items-center">
+            <img
+              [src]="this.curUser.image"
+              class="col-2 scale py-1 ms-3 me-0 my-auto rounded-circle"
+            >
+            <div class="col-lg-6 col-6 ms-0 me-0 pe-0">
+              <span class="fw-bold">{{ this.curUser.fullname }}</span>
+              <br>
+              <span class="text-role">
+                {{this.roles.get(this.curRole)}}
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-md-center">
+          <li>
+            <span class="dropdown-item-text fw-light">
+              Вы вошли как
+              <br>
+              <b>{{ this.curUser.username }}</b>
+            </span>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item fw-light">Настройки аккаунта</a>
+          </li>
+          <li *ngIf="this.curRole === 'admin'">
+            <a class="dropdown-item fw-light" routerLink="admin/users">
+              Администрирование
+            </a>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <a class="dropdown-item text-danger fw-light" (click)="logout()">
+              Выход
+            </a>
+          </li>
+        </ul>
+      </div>
+      <ng-template #Guest>
+        <div
+          class="row col-lg-auto col-11 col-md-auto me-lg-5 mt-sm-0"
+        >
+          <button class="btn btn-primary px-4 fw-light" routerLink="auth">
+            Войти
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</nav>

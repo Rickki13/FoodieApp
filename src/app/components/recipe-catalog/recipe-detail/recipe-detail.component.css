@@ -1,0 +1,64 @@
+.btn-primary {
+  background-color: #3A3395 !important;
+  border-color: #3A3395;
+}
+
+.box {
+  margin: 10rem 5rem 0 5rem;
+}
+
+.strikethrough-styling {
+  text-decoration: line-through;
+}
+
+.card {
+  height: 600px;
+}
+
+.scale {
+  object-fit: cover;
+  height: 600px;
+}
+
+.bg-primary {
+  background-color: #e7fafe !important;
+}
+
+.bg-grey {
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.05);
+  width: 10rem;
+}
+
+.fit {
+  width: 10rem;
+  height: 8rem;
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.form-check-input:checked {
+  background-color: green !important;
+}
+
+.checked {
+  text-decoration: line-through;
+}
+
+.bi-printer,
+.bi-box-arrow-up {
+  background-color: #e5f8fc;
+  cursor: pointer;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.anotherRec {
+  transition: all 0.5s;
+}
+
+.anotherRec:hover {
+  transform: scale(1.1);
+}
